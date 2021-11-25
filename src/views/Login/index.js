@@ -58,7 +58,7 @@ function Login(props) {
   return (
     <div className={styles.form}>
       <div className={styles.logo}>
-        <img alt="logo" src={logo} />
+        <img alt="logo" src="https://s.shudong.wang/devcto-logo-1px.png" />
       </div>
       <Form form={formRef}>
         <FormItem

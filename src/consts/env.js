@@ -1,6 +1,6 @@
 // 判断当前是哪个环境
-export const currentEnv = process.env.FIG_ENV;
-const ctext = currentEnv !== 'prod' ? `开课吧${currentEnv}` : '开课吧';
+export const currentEnv = process.env.FEUP_ENV;
+const ctext = currentEnv !== 'prod' ? `FEUP ${currentEnv}` : 'FEUP';
 
 // 不要删除，用来识别当前项目环境
 // eslint-disable-next-line

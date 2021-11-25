@@ -42,7 +42,7 @@ class BaseLayout extends Component {
               color: 'rgba(0, 0, 0, .45)',
             }}
           >
-            copyright © 2019 北京开课吧科技有限公司版权所有
+            copyright © 2021 FEUP JS版权所有
           </Footer>
         </Layout>
       </Layout>

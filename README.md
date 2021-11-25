@@ -81,7 +81,7 @@ module.exports = {
 
 [点击查看 utils 库](https://feup.cn/utils-pages)
 
-> utils 是一个通用 util 仓库，封装了多个适用于开课吧内部使用的工具函数或函数集合。
+> utils 是一个通用 util 仓库，封装了多个适用于内部使用的工具函数或函数集合。
 
 ## 样式风格（基于 antd 使用了 less）
 
