@@ -8,13 +8,13 @@
 
 ## 使用方式
 
-### 使用 fig-cli
+### 使用 feup
 
 ```bash
 npm set registry https://kvd.feup.cn
-npm install -g @kkb/fig-cli
+npm install -g feup
 
-fig create <projectName>
+feup create <projectName>
 
 # selected `pure-kms`
 
@@ -22,7 +22,7 @@ fig create <projectName>
 
 ```
 
-[点击查看 fig-cli 介绍](https://www.feup.cn/fig-cli/v2)
+[点击查看 feup 介绍](https://www.feup.cn/feup/v2)
 
 ### 使用 git
 
@@ -47,7 +47,7 @@ yarn run start
 生产环境： yarn run build:prod
 ```
 
-## fig.config.js 配置
+## feup.config.js 配置
 
 ```js
 module.exports = {
@@ -75,7 +75,7 @@ module.exports = {
 │   ├── App.js # 入口组件
 │   ├── index.js # 主入口
 ├── README.md # 项目介绍
-├── fig.config.js # fig-cli 配置文件
+├── feup.config.js # fig-cli 配置文件
 ├── package.json # 项目管理说明
 ```
 
