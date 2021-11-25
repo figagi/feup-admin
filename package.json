@@ -34,7 +34,7 @@
     "axios": "^0.21.1",
     "camelcase": "^5.3.1",
     "classnames": "^2.2.6",
-    "feup-cli": "0.1.8",
+    "feup": "^0.1.11",
     "feup-lint": "^0.1.6",
     "moment": "^2.28.0",
     "react": "17.0.2",

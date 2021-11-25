@@ -4,7 +4,6 @@ import zhCn from 'antd/es/locale/zh_CN';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 // import Log from '@kkb/fig-log';
-import { currentEnv } from './consts/env';
 import Routes from './routes';
 import store from './store';
 import './App.css';
