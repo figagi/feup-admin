@@ -1,5 +1,5 @@
 {
-  "name": "fms",
+  "name": "feup-admin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -34,7 +34,7 @@
     "axios": "^0.21.1",
     "camelcase": "^5.3.1",
     "classnames": "^2.2.6",
-    "feup": "^0.1.11",
+    "feup": "^0.1.12",
     "feup-lint": "^0.1.6",
     "moment": "^2.28.0",
     "react": "17.0.2",

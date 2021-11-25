@@ -1,8 +1,6 @@
-## react 脚手架 3.0 fig-pure-kms
+## react 脚手架 feup-admin
 
 > 开启全新的旅程
->
-> 上个版本，请去 release/v2.0 分支
 
 ## 主要应用场景
 
@@ -13,7 +11,7 @@
 ### 使用 fig-cli
 
 ```bash
-npm set registry https://kvd.kaikeba.com
+npm set registry https://kvd.feup.cn
 npm install -g @kkb/fig-cli
 
 fig create <projectName>
@@ -24,7 +22,7 @@ fig create <projectName>
 
 ```
 
-[点击查看 fig-cli 介绍](https://fe.kaikeba.com/fig-cli/v2)
+[点击查看 fig-cli 介绍](https://www.feup.cn/fig-cli/v2)
 
 ### 使用 git
 
@@ -54,11 +52,11 @@ yarn run start
 ```js
 module.exports = {
   name: 'pitaya', // 项目名字
-  dingdingNoticeId: 'xxx', // 钉钉发送通知,联系sdwang@kaikeba.com
+  dingdingNoticeId: 'xxx', // 钉钉发送通知,联系feupjs@163.com
 };
 ```
 
-[点击查看更多配置](https://fe.kaikeba.com/fig-cli/v2/options)
+[点击查看更多配置](https://www.feup.cn/fig-cli/v2/options)
 
 ## 脚手架结构介绍
 
@@ -81,7 +79,7 @@ module.exports = {
 ├── package.json # 项目管理说明
 ```
 
-[点击查看 utils 库](https://fe.kaikeba.com/utils-pages)
+[点击查看 utils 库](https://feup.cn/utils-pages)
 
 > utils 是一个通用 util 仓库，封装了多个适用于开课吧内部使用的工具函数或函数集合。
 
