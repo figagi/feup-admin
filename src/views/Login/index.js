@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Row, Input, message, Form } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import logo from '../../assets/logo.png';
+import logo from './feup-logo.png';
 // import { API_CODE } from '../../consts/apiCode';
 import { JWT_TOKEN } from '../../consts';
 // import { savaUserData } from '../../utils/permissions';
@@ -58,7 +58,7 @@ function Login(props) {
   return (
     <div className={styles.form}>
       <div className={styles.logo}>
-        <img alt="logo" src="https://s.shudong.wang/devcto-logo-1px.png" />
+        <img alt="logo" src={logo} />
       </div>
       <Form form={formRef}>
         <FormItem

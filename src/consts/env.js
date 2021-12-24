@@ -24,7 +24,7 @@ const cmsBaseUrl = {
 
 export const CMS_BASEURL = cmsBaseUrl;
 export const QINIU_BASEURL = cmsBaseUrl;
-export const QINIU_IMG_HOST = `https://img.feup.cn/`;
+export const QINIU_IMG_HOST = `https://s.feup.cn/`;
 
 // access_token
 export const ACCESS_TOKEN = {
