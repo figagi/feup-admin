@@ -6,7 +6,7 @@ import logo from './feup-logo.png';
 // import { API_CODE } from '../../consts/apiCode';
 import { JWT_TOKEN } from '../../consts';
 // import { savaUserData } from '../../utils/permissions';
-import styles from './index.module.styl';
+import styles from './index.module.less';
 
 const FormItem = Form.Item;
 
