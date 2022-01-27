@@ -21,6 +21,32 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>FEUP JS</title>
+
+    <!-- test环境 -->
+    <% if ( htmlWebpackPlugin.options.CONFIG.FEUP_ENV === 'test') { %>
+    <script
+      src="https://sr.kaikeba.com/cdn/js/qvot_moment/2.29.1/moment.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      crossorigin
+      src="https://sr.kaikeba.com/cdn/react/qtfq_react/17.0.2/react.development.js"
+    ></script>
+    <script src="https://sr.kaikeba.com/cdn/react/lumf_react/17.0.2/react-dom.development.js"></script>
+    <% } %>
+
+    <!-- 正式环境 -->
+    <% if ( htmlWebpackPlugin.options.CONFIG.FEUP_ENV === 'prod'||
+    htmlWebpackPlugin.options.CONFIG.FEUP_ENV === 'pre' ) { %>
+    <script
+      src="https://sr.kaikeba.com/cdn/js/qvot_moment/2.29.1/moment.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://sr.kaikeba.com/cdn/react/rfwp_react/17.0.2/react.production.min.js"></script>
+    <script src="https://sr.kaikeba.com/cdn/react/tbyj_react/17.0.2/react-dom.production.min.js"></script>
+    <% } %>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

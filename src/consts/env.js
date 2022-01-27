@@ -1,5 +1,5 @@
 // 判断当前是哪个环境
-export const currentEnv = process.env.FEUP_ENV;
+export const currentEnv = process.env.FEUP_ENV || 'test';
 const ctext = currentEnv !== 'prod' ? `FEUP ${currentEnv}` : 'FEUP';
 
 // 不要删除，用来识别当前项目环境
@@ -15,22 +15,16 @@ export const isPreEnv = currentEnv === 'pre';
 export const isTestEnv = currentEnv === 'test';
 export const isProdEnv = currentEnv === 'prod';
 
-const cmsBaseUrl = {
-  dev: 'https://consoletest.feup.cn',
-  test: 'https://consoletest.feup.cn',
-  pre: 'https://consolepre.feup.cn',
-  prod: 'https://console.feup.cn',
-}[currentEnv];
-
-export const CMS_BASEURL = cmsBaseUrl;
-export const QINIU_BASEURL = cmsBaseUrl;
-export const QINIU_IMG_HOST = `https://s.feup.cn/`;
+const envPrefix = {
+  dev: 'dev-',
+  test: 'test-',
+  pre: 'pre-',
+  prod: '',
+};
 
 // access_token
-export const ACCESS_TOKEN = {
-  dev: 'corgi-token-dev-data',
-  test: 'corgi-token-test-data',
-  test2: 'corgi-token-test2-data',
-  pre: 'corgi-token-pre-data',
-  prod: `corgi-token-prod-data`,
-}[currentEnv];
+export const ACCESS_TOKEN = `corgi-token-${currentEnv}-data`;
+
+export const API = {
+  baseUrl: `https://${envPrefix[currentEnv]}staff-api.kaikeba.cn`,
+};

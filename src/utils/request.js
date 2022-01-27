@@ -1,39 +1,38 @@
 import axios from 'axios';
-import { message } from 'antd';
+import { assert } from '../utils';
 import { HTTP_STATUS } from '../consts/statusCode';
-import { CMS_BASEURL, ACCESS_TOKEN } from '../consts/env';
+import { message } from 'antd';
+import { ACCESS_TOKEN, API } from '../consts/env';
+import Cookie from '../utils/tools/cookie';
 import { apiErrReport } from './log';
-import Cookie from './tools/cookie';
-import logUtils from './tools/logUtils';
 
-axios.defaults.withCredentials = true;
-axios.defaults.timeout = 50000;
-axios.defaults.headers.common['Content-Type'] = 'application/json';
+const instance = axios.create({
+  baseURL: API.baseUrl,
+  timeout: 50000,
+  headers: {
+    'Content-Type': 'application/json',
+    appId: 'null',
+    tenantId: '6XWFVymtaB68REyRBuf',
+  },
+  withCredentials: false,
+});
 
-axios.defaults.baseURL = CMS_BASEURL;
 // 中间件 拦截请求-
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   (config) => {
+    const newConfig = config;
     const token = Cookie.get(ACCESS_TOKEN);
     if (token) {
-      if (!config.params || (config.params && !config.params.disable_token)) {
-        // eslint-disable-next-line no-param-reassign
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+      newConfig.headers.Authorization = `Bearer ${token}`;
     }
-    return config;
+    return newConfig;
   },
   (err) => {
     return Promise.reject(err);
   },
 );
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   (response) => {
-    // jwt认证失效
-    // if (response?.data?.code === COMMON_STATUS.JWT_FAILED) {
-    //   console.log(response);
-    //   // window.location.href = '/login';
-    // }
     return response;
   },
   (err) => {
@@ -42,7 +41,7 @@ axios.interceptors.response.use(
     }
     const res = err.response;
     if (res.status === HTTP_STATUS.AUTHENTICATE) {
-      window.location.href = '/login';
+      // logout();
       Promise.reject(err);
       return;
     }
@@ -52,22 +51,68 @@ axios.interceptors.response.use(
   },
 );
 
-const safeRequest = (url, options) => {
+const exceptionHandling = (data) => {
+  if (!data) {
+    return false;
+  }
+
+  if (
+    data.status === HTTP_STATUS.SUCCESS ||
+    data.status === HTTP_STATUS.POST_SUCCESS ||
+    data.status === HTTP_STATUS.NOT_MODIFIED
+  ) {
+    return data;
+  }
+  assert(false, data.statusText);
+
+  return false;
+};
+
+/**
+ * get
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+const get = (url, params = {}, headers = {}) => {
   return new Promise((resolve, reject) => {
-    axios({
-      method: 'GET',
-      ...options,
-      url,
-    }).then(
-      (res) => {
+    instance
+      .get(url, {
+        params,
+        headers,
+      })
+      .then((response) => {
+        const res = exceptionHandling(response);
         if (res) {
-          resolve(res.data);
+          resolve(res.data.data);
         } else {
           reject(res);
         }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+/**
+ * post
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+const post = (url, data = {}, headers = {}) => {
+  return new Promise((resolve, reject) => {
+    instance.post(url, data, { headers }).then(
+      (response) => {
+        const res = exceptionHandling(response);
+        if (res) {
+          resolve(response.data);
+        } else {
+          reject(res.error);
+        }
       },
       (err) => {
-        logUtils.error(err);
         reject(err);
       },
     );
@@ -75,38 +120,50 @@ const safeRequest = (url, options) => {
 };
 
 /**
- * get
+ * put
  * @param url
- * @param opts
+ * @param data
  * @returns {Promise}
  */
-const get = (url, opts = {}) => {
-  return safeRequest(url, opts);
-};
-
-/**
- * post
- * @param url
- * @param opts
- * @returns {Promise}
- */
-const post = (url, opts = {}) => {
-  return safeRequest(url, {
-    ...opts,
-    method: 'POST',
+const put = (url, data = {}, headers = {}) => {
+  return new Promise((resolve, reject) => {
+    instance.put(url, data, { headers }).then(
+      (response) => {
+        const res = exceptionHandling(response);
+        if (res) {
+          resolve(response.data);
+        } else {
+          reject(res.error);
+        }
+      },
+      (err) => {
+        reject(err);
+      },
+    );
   });
 };
 
 /**
- * put
+ * del
  * @param url
- * @param opts
+ * @param data
  * @returns {Promise}
  */
-const put = (url, opts = {}) => {
-  return safeRequest(url, {
-    ...opts,
-    method: 'PUT',
+const del = (url, data = {}, headers = {}) => {
+  return new Promise((resolve, reject) => {
+    instance.delete(url, { data, headers }).then(
+      (response) => {
+        const res = exceptionHandling(response);
+        if (res) {
+          resolve(response.data);
+        } else {
+          reject(res.error);
+        }
+      },
+      (err) => {
+        reject(err);
+      },
+    );
   });
 };
 
@@ -114,6 +171,7 @@ const request = {
   get,
   post,
   put,
+  del,
 };
 
 export default request;
